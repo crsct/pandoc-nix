@@ -20,23 +20,27 @@
           config.allowUnfree = true;
           overlays = [ overlay ];
         };
+        tex = (pkgs.texliveMedium.withPackages (
+          ps: with ps; [
+            wrapfig
+        ]));
       in
       {
         packages = {
           default = pkgs.pandoc-nix;
-          pandoc = pkgs.pandoc-nix;
+          # pandoc = pkgs.pandoc-nix;
         };
 
-        mkDoc = pkgs.mkDoc;
+        mkDoc = pkgs.mkDoc { texlive-combined = tex; };
 
         apps = {
           default = {
             type = "app";
-            program = "${pkgs.pandoc-nix}/bin/pandoc";
+            program = "${pkgs.pandoc}/bin/pandoc";
           };
           pandoc = {
             type = "app";
-            program = "${pkgs.pandoc-nix}/bin/pandoc";
+            program = "${pkgs.pandoc}/bin/pandoc";
           };
         };
 
@@ -44,8 +48,8 @@
 
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
-            pandoc-nix
-            texlive.combined.scheme-medium
+            pandoc
+            tex
             nixpkgs-fmt
             nix-prefetch-git
             cachix
