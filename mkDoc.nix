@@ -1,5 +1,5 @@
 { stdenv, lib, pandoc, texlive, fontconfig }:
-{ texlive-combined ? texlive.combined.scheme-medium
+{ texlive-combined ? texliveMedium
 , extraTexInputs ? [ ]
 , font ? null
 , extraBuildInputs ? [ ]
