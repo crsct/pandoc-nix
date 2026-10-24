@@ -20,10 +20,6 @@
           config.allowUnfree = true;
           overlays = [ overlay ];
         };
-        tex = (pkgs.texliveMedium.withPackages (
-          ps: with ps; [
-            wrapfig
-        ]));
       in
       {
         packages = {
@@ -31,7 +27,7 @@
           # pandoc = pkgs.pandoc-nix;
         };
 
-        mkDoc = pkgs.mkDoc { texlive-combined = tex; };
+        mkDoc = pkgs.mkDoc;
 
         apps = {
           default = {
